@@ -23,6 +23,12 @@ $file_duplicates = Get-ChildItem -Path $sourceDir -Recurse |
     }
 
 Write-Host "Search completed..." -ForegroundColor Green
-foreach ($file in $file_duplicates) {
-    Write-Host "Found duplicate: $($file.Path)" -ForegroundColor Magenta
+foreach ($group in $file_duplicates) {
+     $files = $group.Group
+    # Keep the first file, delete the rest
+    $filesToDelete = $files | Select-Object -Skip 1
+    foreach ($file in $filesToDelete) {
+        Write-Host "Deleting: $($file.Path)" -ForegroundColor Red
+        Remove-Item -Path $file.Path -Force
+    }
 }
