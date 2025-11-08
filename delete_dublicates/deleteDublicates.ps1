@@ -38,7 +38,7 @@ if (!(Test-Path $LogFile)) {
 }
 
 # Define file types to check
-$Extensions = @(".pdf", ".docx", ".jpg", ".png", ".txt", ".ppt", ".html", ".drawio")
+$Extensions = @(".pdf", ".docx", ".jpg", ".png", ".txt", ".pptx", ".html", ".drawio")
 $dublicateCounter = 0
 
 # Get subfolders only
