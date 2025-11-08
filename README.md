@@ -1,2 +1,2 @@
 # Powershell_projects
-The repository list some powershell repositories
+This repository lists some useful automatisation projects for windows
