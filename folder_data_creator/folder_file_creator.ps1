@@ -15,45 +15,7 @@ Write-Host ".......Script Folder File Renaming started....." -ForegroundColor Ma
 
 Write-Host "===========================================================================================" -ForegroundColor Yellow
 
-# Function section 
-# --- Renaming folder
-function Rename-Folder{
-    param (
-        [string]$Path,
-        [string]$OldName,
-        [string]$NewName,
-        [switch]$Rename
-    )
-    # search for matching folders
-    $items = Get-ChildItem -Path $Path -Recurse -Directory | Where-Object {$_.Name -match $OldName}
-    foreach($item in $items )
-    {
-        Write-Host "Found: $($item.FullName)"
-        if($Rename)
-        {
-            $newName = $item.Name -replace $OldName, $NewName
-            Rename-Item -Path $item.Name -NewName $newName
-            Write-Host "Renamed to: $newName"
-        }
 
-    }
-
-}
-function Rename-File {
-    param (
-        [string]$Path,
-        [string]$OldFileName,
-        [string]$NewFileName
-    )
-    # search for matching file name and rename them 
-        $files = Get-ChildItem -Path $Path -File -Recurse | Where-Object{ $_.Name -match $OldFileName}
-        foreach($file in $files){
-        $newName = $file.Name -replace $OldFileName, $NewFileName
-        Rename-Item -Path $file.Name -NewName $newName
-        Write-Host "Renamed $OldFileNam to: $neName"
-    }
-}
-# --------------------------- End of function section
 do{
 # Get user prefered Dateination
 
@@ -84,7 +46,8 @@ else{
 if($whatUserWantsToDo -eq "create")
 {
 
-$sourcePath = Read-Host "Enter <path_to_folder\foldername>"
+
+$sourcePath = Read-Host "Enter compete path (including the folder name) you would want to save the folder in"
 
 # check if path exist create if not
 $pathToFolder = "$sourceDir\$sourcePath"
@@ -96,7 +59,7 @@ if(!(Test-Path -Path $pathToFolder))
     Write-Host "($pathToFolder) was created" -ForegroundColor Green
 }
 do{
-    $createFile = Read-Host "Do you want to create a file? yes [y] no [n] "
+    $createFile = Read-Host "Do you want to create a file? yes [y] or no [n] "
     if($createFile -notin @("y", "n")){
         Write-Host "Invalid Input. Try again" -ForegroundColor Yellow
     }elseif ($createFile -eq "y") {
@@ -126,7 +89,11 @@ do{
             $getNewName = Read-Host "Enter newfolder name" 
 
             # Search for folder name and rename it 
-            Rename-Folder -Path $sourceDir -OldName $getFolderName -NewName $getNewName -Rename
+            $items = Get-ChildItem -Path $sourceDir -Recurse | Where-Object {$_.Name -eq $getFolderName}
+            foreach($item in $items)
+            {
+                Rename-Item -Path $item.Name -NewName  $getNewName
+            }
             Write-Host "Changed $getFolderName to $getNewName " -ForegroundColor Green
             break
             
@@ -135,7 +102,11 @@ do{
         "fl" {
             $fileName = Read-Host "Enter file name"
             $newFileName = Read-Host "Enter new file name"
-            Rename-File -Path $sourceDir -OldFileName $fileName -NewFileName $newFileName
+            $items = Get-ChildItem -Path $sourceDir -Recurse | Where-Object {$_.Name -eq $fileName}
+            foreach($item in $items)
+            {
+                Rename-Item -Path $item.Name -NewName  $newFileName
+            }
             Write-Host "Changed $fileName to $newFileName " -ForegroundColor Green
             break
 
