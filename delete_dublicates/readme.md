@@ -1,8 +1,8 @@
 🧪 What the Script Does
 1. Recursively searches all files in the specified directory.
 
-2. Groups them by file size.
+2. Counts dublicates.
 
-3. Checks files with the same size for identical hash values.
+3. Deletes dublicates.
 
-4. Outputs the paths of duplicate files.
+4. Outputs the paths of duplicate and deleted files in a logfile.txt.
