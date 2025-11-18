@@ -43,10 +43,11 @@ else{
 }
 }while($true)
 
+# check what the user wants to do
 if($whatUserWantsToDo -eq "create")
 {
 
-
+# enter Source path
 $sourcePath = Read-Host "Enter compete path (including the folder name) you would want to save the folder in"
 
 # check if path exist create if not
@@ -59,12 +60,13 @@ if(!(Test-Path -Path $pathToFolder))
     Write-Host "($pathToFolder) was created" -ForegroundColor Green
 }
 do{
+    # Verify if user want to create a file in the created folder 
     $createFile = Read-Host "Do you want to create a file? yes [y] or no [n] "
     if($createFile -notin @("y", "n")){
         Write-Host "Invalid Input. Try again" -ForegroundColor Yellow
     }elseif ($createFile -eq "y") {
         # Get File name
-        $fileName = Read-Host "Enter filename (eg. example.txt)"
+        $fileName = Read-Host "Enter filename with extensions (eg. example.txt)"
         # Search if file exist and create if not 
         if(!(Test-Path -Path $fileName -PathType Leaf))
         {
@@ -75,6 +77,7 @@ do{
             break
         }
     }else{
+        # End Script if user declines to create a file in created folder 
         Write-Host "Ending Script. Thank You" -ForegroundColor Green
         break      
     }
@@ -82,43 +85,29 @@ do{
 
 }elseif($whatUserWantsToDo -eq "rename")
 {
+    # Check if the user wants to rename a folder or a file
+    do{
     $folderOrFile = Read-Host "Do you want to rename a folder [fd] or file [fl]"
-    switch ($folderOrFile) {
-        "fd" {
-            $getFolderName = Read-Host "Enter existing folder in $sourceDir you want to rename"
-            $getNewName = Read-Host "Enter newfolder name" 
-
-            # Search for folder name and rename it 
-            $items = Get-ChildItem -Path $sourceDir -Recurse | Where-Object {$_.Name -eq $getFolderName}
-            foreach($item in $items)
-            {
-                Rename-Item -Path $item.Name -NewName  $getNewName
-            }
-            Write-Host "Changed $getFolderName to $getNewName " -ForegroundColor Green
-            break
-            
-        }
-        
-        "fl" {
-            $fileName = Read-Host "Enter file name"
-            $newFileName = Read-Host "Enter new file name"
-            $items = Get-ChildItem -Path $sourceDir -Recurse | Where-Object {$_.Name -eq $fileName}
-            foreach($item in $items)
-            {
-                Rename-Item -Path $item.Name -NewName  $newFileName
-            }
-            Write-Host "Changed $fileName to $newFileName " -ForegroundColor Green
-            break
-
-        }
-        Default {
-            Write-Host "Standard Default no changes "
-            break
-        }
+    if($folderOrFile -notin ("fd", "fl"))
+    {
+        Write-Host "Invalid choice. Try again" -ForegroundColor Red
     }
+    if($folderOrFile -eq "fd" -or $folderOrFile -eq "fl")
+    {
+        # exist loop if either user chose rename folder or file
+        break 
+    }
+
+    }while($true)
+    
     # Search for a specific folder or file name in the directory 
-
-
+    if($folderOrFile -eq "fd")
+    {
+        Write-Host "Renaming Folder..." -ForegroundColor Cyan 
+        $folderName = Read-Host "Enter the name of the folder "
+        # search folder in system
+        $
+    }
 }else{
     Write-Host "No changes" -ForegroundColor Magenta
 
