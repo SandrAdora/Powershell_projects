@@ -8,10 +8,10 @@
 # Version:        1.1                     #
 ###########################################
 
-Write-Host "===========================================================================================" -ForegroundColor Yellow
-Write-Host ".......Script Folder File Creator started....." -ForegroundColor Magenta
-Write-Host ".......Script Folder File Renaming started....." -ForegroundColor Magenta
-Write-Host "===========================================================================================" -ForegroundColor Yellow
+Write-Host "========================================================================================================================" -ForegroundColor Yellow
+Write-Host "..........................................Script Folder File Creator started............................................" -ForegroundColor Magenta
+Write-Host "..........................................Script Folder File Renaming started..........................................." -ForegroundColor Magenta
+Write-Host "========================================================================================================================" -ForegroundColor Yellow
 
 # Step 1: Get user preferred root directory
 do {
@@ -147,7 +147,7 @@ if ($whatUserWantsToDo -eq "create") {
     Write-Host "No changes made." -ForegroundColor Magenta
 }
 
-Write-Host "===========================================================================================" -ForegroundColor Yellow
-Write-Host ".......Script Folder File Creator ended....." -ForegroundColor Magenta
-Write-Host ".......Script Folder File Renaming ended....." -ForegroundColor Magenta
-Write-Host "===========================================================================================" -ForegroundColor Yellow
+Write-Host "========================================================================================================================" -ForegroundColor Yellow
+Write-Host "............................................Script Folder File Creator ended............................................" -ForegroundColor Magenta
+Write-Host "............................................Script Folder File Renaming ended..........................................." -ForegroundColor Magenta
+Write-Host "========================================================================================================================" -ForegroundColor Yellow
