@@ -1,5 +1,5 @@
 ###########################################
-# Project: Folder File Creator & Renamer  #
+# Project: Folder File Creator & Rename   #
 # This program creates or renames a       #
 # folder/file in a preferred directory    #
 #                                         #
@@ -56,6 +56,8 @@ if ($whatUserWantsToDo -eq "create") {
                 Write-Host "Creating file...." -ForegroundColor Cyan
                 New-Item -Path $pathToFolder -Name $fileName -ItemType "File" | Out-Null
                 Write-Host "Creation complete, File ($fileName) was created in folder $pathToFolder" -ForegroundColor Green
+		# Open created folder
+		Start-Process $pathToFolder
             } else {
                 Write-Host "File already exists at $filePath" -ForegroundColor Yellow
             }
