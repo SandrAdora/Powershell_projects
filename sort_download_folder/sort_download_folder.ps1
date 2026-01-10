@@ -11,10 +11,7 @@ $destinationFolders = @{
     "PDFs"        = "C:\Users\$env:USERNAME\Documents\PDFs"
     "Zips"        = "C:\Users\$env:USERNAME\Dokuments\Zips"
     "Others"      = "C:\Users\$env:USERNAME\others"
-
-	
-	
-    
+    "excel"       = "C:\Users\$env:USERNAME\Excel"     
 }
 
 # Überprüfen, ob der Quellordner existiert
@@ -49,13 +46,9 @@ Get-ChildItem -Path $sourcePath -File | ForEach-Object {
         ".mp4" { $destinationPath = $destinationFolders["Videos"] }
         ".pdf" { $destinationPath = $destinationFolders["PDFs"] }
         ".docx" { $destinationPath = $destinationFolders["Documents"] }
-        ".xlsx" { $destinationPath = $destinationFolders["Excel"] }
-        ".csv" {$destinationPath = $destinationFolders["Excel"]}
+        ".xlsx" { $destinationPath = $destinationFolders["excel"] }
+        ".csv" {$destinationPath = $destinationFolders["excel"]}
         ".zip" {$destinationPath = $destinationFolders["Zips"]}
-
-		
-		
-
     }
 }
 
