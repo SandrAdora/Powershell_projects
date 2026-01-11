@@ -7,11 +7,21 @@
 # Datum:   12.06.2025                          #
 ################################################
 
-Write-Host "You have started the Screen activator Script" -ForegroundColor Green
+Write-Host "You have started the Screen settings Script" -ForegroundColor Green
 
 Write-Host "--------------------------------------------------------" -ForegroundColor Magenta
+# Get the current display timeout settings for AC (plugged in) and DC (battery)
+$acTimeout = powercfg /query SCHEME_CURRENT SUB_VIDEO VIDEOIDLE | 
+Select-String -Pattern "Power Setting Index" | ForEach-Object { ($_ -split ':')[1].Trim() }
 
+$dcTimeout = powercfg /query SCHEME_CURRENT SUB_VIDEO VIDEOIDLE | 
+Select-String -Pattern "Power Setting Index" | ForEach-Object { ($_ -split ':')[1].Trim() }
 
+Write-Host " Your Current Screen Modus: " -ForegroundColor Yellow
+Write-Host "Display timeout when plugged in (AC): $($acTimeout) seconds"
+Write-Host "Display timeout on battery (DC): $($dcTimeout) seconds"
+
+Write-Host "--------------------------------------------------------" -ForegroundColor Magenta 
     Write-Host "You can know change the standby modus of your screen" -ForegroundColor Blue
 
     $choice = Read-Host "Do you want to do this following
@@ -40,4 +50,4 @@ Write-Host "--------------------------------------------------------" -Foregroun
         }
     }
     
-    Write-Host "Screen modification was successfull" -ForegroundColor Green
+Write-Host "----------------Script ran sucessfully---------------------------------------" -ForegroundColor Magenta
