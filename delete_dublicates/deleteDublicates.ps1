@@ -31,7 +31,7 @@ if (!(Test-Path $rootDirectory)) {
 }
 
 # Setup logging
-$LogFile = "$env:TEMP\duplicate_deletion_log.txt"
+$LogFile = "$env:USERName\TEMP\duplicate_deletion_log.txt"
 if (!(Test-Path $LogFile)) {
     New-Item -Path $LogFile -ItemType File -Force | Out-Null
     Write-Host "Log file created at $LogFile" -ForegroundColor Green
@@ -47,11 +47,9 @@ $subFolders = Get-ChildItem -Path $rootDirectory -Directory
 foreach ($folder in $subFolders) {
     foreach ($extension in $Extensions) {
         $files = Get-ChildItem -Path $folder.FullName -Recurse -File | Where-Object { $_.Extension -eq $extension }
-
         foreach ($file in $files) {
             $fileName = $file.Name
             $sourcePath = $file.FullName
-
             # Check for duplicates in other subfolders
             $duplicateFound = $false
             foreach ($compareFolder in $subFolders) {
