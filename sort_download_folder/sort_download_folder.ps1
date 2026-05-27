@@ -48,6 +48,7 @@ Get-ChildItem -Path $sourcePath -File | ForEach-Object {
         ".docx" { $destinationPath = $destinationFolders["Documents"] }
         ".xlsx" { $destinationPath = $destinationFolders["excel"] }
         ".csv" {$destinationPath = $destinationFolders["excel"]}
+		".xlsm" { $destinationPath = $destinationFolders["excel"]}
         ".zip" {$destinationPath = $destinationFolders["Zips"]}
     }
 }
